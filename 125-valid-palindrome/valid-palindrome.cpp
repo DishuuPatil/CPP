@@ -1,24 +1,25 @@
 class Solution {
 public:
     bool isPalindrome(string s) {
-        string filtered;
-        for (char c : s) {
-            if (isalnum(c)) {
-                filtered += tolower(c);
+        return isPalindrom(0,s.size()-1, s);
+    }
+
+    bool isPalindrom(int first, int last, string& str)
+    {
+        if(first>=last)
+            return true;
+        if(isalnum(str[first]) && isalnum(str[last]))
+            if(tolower(str[first]) != tolower(str[last]))return false;
+            else{
+                return isPalindrom(first+1, last-1, str);
             }
+        else{
+            if(!isalnum(str[first]))
+                first++;
+            if(!isalnum(str[last]))
+                last--;
+            return isPalindrom(first, last, str);
         }
-
-        int left = 0;
-        int right = filtered.size() - 1;
-
-        while (left < right) {
-            if (filtered[left] != filtered[right]) {
-                return false;
-            }
-            left++;
-            right--;
-        }
-
-        return true;        
+        
     }
 };

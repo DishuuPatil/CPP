@@ -10,13 +10,20 @@ public:
         {
             hasharr[nums[i]]++;
         }
-        for (int i = 0; i <= maxele; i++) {
-            if (hasharr[i] == 1) {
-                bool leftEmpty  = (i == 0) || (hasharr[i-1] == 0);
-                bool rightEmpty = (i == maxele) || (hasharr[i+1] == 0);
-                if (leftEmpty && rightEmpty)
-                    result.push_back(i);
+
+        for(int num : nums)
+        {
+            if(hasharr[num]==1)
+            {
+                if(num==0)
+                {
+                    if(hasharr[num+1]==0)
+                        result.push_back(num);
+                }
+                else if(hasharr[num-1]==0 && hasharr[num+1]==0)
+                    result.push_back(num);
             }
+            
         }
         return result;
     }
